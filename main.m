@@ -1,30 +1,30 @@
 clear 
-drawDynamic = 0;
+drawDynamic = 0; % draw plot after each time steps? 0 - false, 1 - true
 
-L = 3;
-k = 127e-6;
-dt = 0.4; %
+L = 3; % length
+k = 127e-6; % Thermal diffusivity
+dt = 0.4; % change in time
 nx = 240; % Number of gridpoints in x-direction
 dx = L/(nx-1); % Spacing of grid
-nt = 1200*2;
+nt = 1200*2; % timesteps
 gridcopy = zeros(nt, nx);
 X = (1:1:nt) * dt;
 Y = (1:1:nx) * dx;
-% Stabilność
+% Stability - Courant–Friedrichs–Lewy condition
 CFL = k*dt/dx^2;
 if 0.5 < CFL
     disp("Unstable parameters!")
 end
-% Warunki początkowe
+% Initial parameters
 gridcopy(1,:) =  0;
 gridcopy(1,80:160) =  20;
-% 3 sposoby - 1. Dirichlett, 2. Neumann (izolacja), 3. Strumień ciepła
+% 3 methods - 1. Dirichlett, 2. Neumann (isolation), 3. Heat flux
 L = 3;
 R = 3;
-    % 3 sposób - zmienne
+    % 3 method - variables
 fluxL = 0.1;
 fluxR = 0.02;
-    % 1 sposób zmienne
+    % 1 method variables
 TL = 0;
 TR = 0;
 
@@ -55,8 +55,8 @@ for n=2:nt
 end
 
 mesh(Y, X, gridcopy)
-xlabel('Odległość [m]')
-ylabel('Czas [s]')
-zlabel('Temperatura [C]')
-title({['Temperatura po '], [num2str(round(nt*dt)), ' sekundach'] [num2str(round(nt*dt/60)), 'minutach'],[num2str(round(nt*dt/3600)), ' godzinach '], [num2str(round(nt*dt/(3600*24))), ' dniach']})
+xlabel('Distance [m]')
+ylabel('Time [s]')
+zlabel('Temperature [C]')
+title({['Temperature after '], [num2str(round(nt*dt)), ' s'] [num2str(round(nt*dt/60)), ' min'],[num2str(round(nt*dt/3600)), ' h '], [num2str(round(nt*dt/(3600*24))), ' d']})
 
