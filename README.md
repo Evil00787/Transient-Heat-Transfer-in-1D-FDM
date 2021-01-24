@@ -1,4 +1,4 @@
-# Transient-Heat-Transfer-in-1D-FDM
+# Transient-Heat-Transfer-in-1D-FDM - Matlab code
 
 Transient Heat Transfer in 1D with Finite Differece Method
 
